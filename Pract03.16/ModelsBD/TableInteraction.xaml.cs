@@ -79,8 +79,8 @@ namespace Pract03._16.ModelsBD
             }
             else
             {
-                wTableInteraction.Title = "";
-                btnAddEditTI.Content = "";
+                wTableInteraction.Title = "Изменение записи";
+                btnAddEditTI.Content = "Изменить";
                 _flight = _db.Flights.Find(Flights.fly.FlightId);
             }
             wTableInteraction.DataContext = _flight;

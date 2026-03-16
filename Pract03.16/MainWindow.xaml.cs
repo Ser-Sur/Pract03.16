@@ -1,5 +1,7 @@
 ﻿using Pract03._16.ModelsBD;
+using System.Security.Claims;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -7,6 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -101,6 +104,21 @@ namespace Pract03._16
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadDBInDataGrid();
+        }
+
+        public void FindRecordInDG(string criterion)
+        {
+            List<Flight> listItem = (List<Flight>)dg_Flishts.ItemsSource;
+            var filtered = listItem.Where(p => p.Destination.Contains(criterion) ||
+                (!string.IsNullOrEmpty(p.DepartureTime) ? p.DepartureTime.Contains(criterion) : false) ||
+                (!string.IsNullOrEmpty(p.ArrivalTime) ? p.ArrivalTime.Contains(criterion) : false));
+            if (filtered.Count() > 0)
+            {
+                var item = filtered.First();
+                dg_Flishts.SelectedItem = item;
+                dg_Flishts.ScrollIntoView(item);
+                dg_Flishts.Focus();
+            }
         }
     }
 }
