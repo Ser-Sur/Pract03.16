@@ -30,6 +30,7 @@ namespace Pract03._16
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         private void AddRecord_Click(object sender, RoutedEventArgs e)
