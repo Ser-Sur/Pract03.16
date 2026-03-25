@@ -10,12 +10,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ModelsBD\МАХ.png" />
+    <None Remove="МАХ.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.13">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ModelsBD\МАХ.png" />
+    <Resource Include="МАХ.png" />
   </ItemGroup>
 
 </Project>

@@ -25,6 +25,7 @@ namespace Pract03._16.ModelsBD
         public TableInteraction()
         {
             InitializeComponent();
+
         }
 
         private void AddEditTI_Click(object sender, RoutedEventArgs e)
@@ -48,9 +49,6 @@ namespace Pract03._16.ModelsBD
             {
                 if (Flights.fly == null)
                 {
-                    Random rnd = new();
-                    int id = 21326 + rnd.Next(1000, 9999);
-                    _flight.FlightId = id;
                     _db.Flights.Add(_flight);
                     _db.SaveChanges();
                 }

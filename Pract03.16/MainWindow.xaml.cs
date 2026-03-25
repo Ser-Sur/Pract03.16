@@ -1,4 +1,5 @@
-﻿using Pract03._16.ModelsBD;
+﻿using Microsoft.IdentityModel.Tokens;
+using Pract03._16.ModelsBD;
 using System.Security.Claims;
 using System.Text;
 using System.Threading;
@@ -41,8 +42,7 @@ namespace Pract03._16
         }
         private void DeleteRecord_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult resultMB;
-            resultMB = MessageBox.Show("Удалить запись?","Удаление записи",MessageBoxButton.YesNo,MessageBoxImage.Warning);
+            MessageBoxResult resultMB = MessageBox.Show("Удалить запись?","Удаление записи",MessageBoxButton.YesNo,MessageBoxImage.Warning);
             if (resultMB == MessageBoxResult.Yes)
             {
                 try
@@ -82,7 +82,10 @@ namespace Pract03._16
         }
         private void Info_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("");
+            MessageBox.Show("Практическая работа №17\nСоздание приложения с БД.\nАртемкин М. В. ИСП-31" +
+                "\n\nВариант 2.\r\nСведения о рейсах Аэрофлота. База данных должна содержать следующую информацию: " +
+                "\nномер рейса, пункт назначения, время вылета, время прибытия, " +
+                "\nколичество свободных мест, тип самолета и его вместимость.");
         }
 
         void LoadDBInDataGrid()
@@ -106,12 +109,25 @@ namespace Pract03._16
             LoadDBInDataGrid();
         }
 
-        public void FindRecordInDG(string criterion)
+        private void Filter_Click(object sender, RoutedEventArgs e)
+        {
+            if (!tbParametr.Text.IsNullOrEmpty())
+            {
+                using (AeroFlotContext _db = new())
+                {
+                    var filtered = _db.Flights.Where(p => p.Destination == tbParametr.Text);
+                    dg_Flishts.ItemsSource = filtered.ToList();
+                }
+            }
+            else LoadDBInDataGrid();
+        }
+
+        private void Find_Click(object sender, RoutedEventArgs e)
         {
             List<Flight> listItem = (List<Flight>)dg_Flishts.ItemsSource;
-            var filtered = listItem.Where(p => p.Destination.Contains(criterion) ||
-                (!string.IsNullOrEmpty(p.DepartureTime) ? p.DepartureTime.Contains(criterion) : false) ||
-                (!string.IsNullOrEmpty(p.ArrivalTime) ? p.ArrivalTime.Contains(criterion) : false));
+            var filtered = listItem.Where(p => p.Destination.Contains(tbParametr.Text) ||
+                (!string.IsNullOrEmpty(p.DepartureTime) ? p.DepartureTime.Contains(tbParametr.Text) : false) ||
+                (!string.IsNullOrEmpty(p.ArrivalTime) ? p.ArrivalTime.Contains(tbParametr.Text) : false));
             if (filtered.Count() > 0)
             {
                 var item = filtered.First();

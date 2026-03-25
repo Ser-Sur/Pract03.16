@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pract03._16"
         mc:Ignorable="d"
-        Title="MainWindow"  Height="600" Width="800" Loaded="Window_Loaded" ResizeMode="NoResize">
+        Title="Создание приложения с БД" Height="600" Width="800" Loaded="Window_Loaded" ResizeMode="NoResize" Icon="/МАХ.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -21,6 +21,10 @@
                 <MenuItem Header="Выход" Click="Exit_Click"/>
             </MenuItem>
             <MenuItem Header="Справка" Click="Info_Click"/>
+            <Separator/>
+            <TextBox x:Name="tbParametr" Width="125" FontSize="12"/>
+            <MenuItem Header="Фильтр" ToolTip="Фильтр по Пункту Назначения" Click="Filter_Click"/>
+            <MenuItem Header="Поиск" ToolTip="Поиск по Пункту Назначения, Времени вылета/прибытия" Click="Find_Click"/>
         </Menu>
         <DataGrid x:Name="dg_Flishts" Grid.Row="1" IsReadOnly="True" AutoGenerateColumns="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <DataGrid.Columns>
